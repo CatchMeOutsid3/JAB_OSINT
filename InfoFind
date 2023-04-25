@@ -1,0 +1,181 @@
+#!/usr/bin/env python
+# This project is built with education and legal research in mind, your use may result in jail/prison time,
+# if used for illegal purposed
+
+
+# Twitter: Greg4Cyber/CyberGreg
+# Date of release: 04/25/23
+
+# Have Fun if your editing your version of the script
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import quote
+import webbrowser as wb
+state_dict = {
+    'AL': 'Alabama: Birmingham - WBRC-TV',
+    'AK': 'Anchorage: KTUU-TV',
+    'AR': 'Phoenix: KPHO-TV',
+    'AZ': 'Little Rock: KARK-TV',
+    'CA': 'California: Los Angeles: KABC-TV',
+    'CO': 'Colorado - Denver: KMGH-TV',
+    'DE': 'Wilmington: WDEL-AM/FM',
+    'FL': 'Florida - Jacksonville: WJXT-TV',
+    'GA': 'Georgia - Atlanta: WSB-TV',
+    'HI': 'Hawaii - Honolulu: KHON-TV',
+    'ID': 'Idaho - Boise: KTVB-TV',
+    'IL': 'Illinois - Chicago: WGN-TV',
+    'IN': 'Indiana - Indianapolis: WTHR-TV',
+    'IA': 'Iowa - Des Moines: KCCI-TV',
+    'KS': 'Kansas - Wichita: KWCH-DT',
+    'KY': 'Kentucky - Louisville: WDRB-TV',
+    'LA': 'Louisiana - New Orleans: WWL-TV',
+    'ME': 'Maine - Portland: WMTW-TV',
+    'MD': 'Maryland - Baltimore: WBAL-TV',
+    'MA': 'Massachusetts - Boston: WCVB-TV',
+    'MI': 'Michigan - Detroit: WDIV-TV',
+    'MN': 'Minnesota - Minneapolis: KARE-TV',
+    'MS': 'Mississippi - Jackson: WLBT-TV',
+    'MO': 'Missouri - Kansas City: KCTV',
+    'MT': 'Montana - Billings: KTVQ-TV',
+    'NE': 'Nebraska - Omaha: KETV',
+    'NV': 'Nevada - Las Vegas: KSNV',
+    'NH': 'New Hampshire - Manchester: WMUR-TV',
+    'NJ': ' New Jersey - Newark: WABC-TV',
+    'NM': 'New Mexico - Albuquerque: KOAT-TV',
+    'NY': 'New York - New York City: WABC-TV',
+    'NC': 'North Carolina - Charlotte: WBTV',
+    'ND': 'North Dakota - Fargo: KVLY-TV',
+    'OH': 'Ohio - Columbus: WBNS-TV',
+    'OK': 'Oklahoma - Oklahoma City: KWTV-DT',
+    'OR': 'Oregon - Portland: KPTV',
+    'PA': 'Pennsylvania - Philadelphia: WPVI-TV',
+    'RI': 'Rhode Island - Providence: WPRI-TV',
+    'SC': 'South Carolina - Columbia: WLTX-TV',
+    'SD': 'South Dakota - Sioux Falls: KELO-TV',
+    'TN': 'Tennessee - Memphis: WREG-TV',
+    'TX': 'Texas - Houston: KPRC-TV',
+    'UT': 'Utah - Salt Lake City: KSL-TV',
+    'VT': 'Vermont - Burlington: WPTZ-TV',
+    'VA': ' Virginia - Virginia Beach: WVEC-TV',
+    'WA': 'Washington - Seattle: KOMO-TV',
+    'WV': 'West Virginia - Charleston: WCHS-TV',
+    'WI': 'Wisconsin - Milwaukee: WISN-TV',
+    'WY': 'Wyoming - Cheyenne: KGWN-TV'
+}
+
+
+# Set the answer types
+y = 'y', 'ye', 'yes', "y3s", 'Y', 'YE', 'YES', 'y3s', 'Y3S'
+n = 'n', 'no', 'N', 'NO', 'N0', 'n0'
+error = 'Please Restart and Try Again.'
+
+# Questions
+Q1 = 'Is this your first-time getting started with OSINT?'
+Q2 = 'Would you like to search anything specific?'
+Q3 = 'Are you looking for someone?'
+Q4 = 'Do you want the news from a particular state?'
+Q5 = 'What State? Abbreviation only: '
+Q6 = 'Do you have images that you want to search?'
+Q7 = 'Would you like to view extras?'
+
+# Code, starting with the 1st question
+def InfoFinder():
+    while True:
+        print(Q1)
+        answer1 = input()
+        if answer1 in n:
+            pass
+        if answer1 in y:
+            print(wb.open_new_tab("https://www.sentinelone.com/cybersecurity-101/open-source-intelligence-osint/")),
+            pass
+        if answer1 not in n and answer1 not in y:
+            pass
+# Specific Searching
+        print(Q2)
+        answer2 = input()
+        if answer2 in n:
+            pass
+        if answer2 in y:
+            print(wb.open_new_tab("https://www.google.com/advanced_search" and "https://searx.thegpm.org/"))
+            pass
+        if answer2 not in y and answer2 not in n:
+            pass
+
+        print(Q3)
+        answer3 = input()
+        if answer3 in n:
+            pass
+        if answer3 in y:
+            print("Do you think they are missing?")
+            answer35 = input()
+            if answer35 in y:
+                print(wb.open_new_tab("https://www.namus.gov/MissingPersons/Search")),
+                print(wb.open_new_tab(
+                    "https://search.brave.com/search?q=state+database+for+missing+people&source=?"))
+            if answer35 in n:
+                print(wb.open_new_tab("https://www.spytox.com" and "https://www.whitepages.com"))
+            if answer35 not in n and answer35 not in y:
+                pass
+
+        if answer3 not in n and answer3 not in y:
+            pass
+
+        def ddg_answers(query):
+            search_url = 'https://duckduckgo.com/html/?q=' + quote(query)
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,'
+                                     ' like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+            response = requests.get(search_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            results = soup.select('a.result__url')
+            for result in results:
+                print(result['href'])
+# Missing Person/States
+        print(Q4)
+        answer4 = input()
+        if answer4 in n:
+            pass
+        if answer4 in y:
+            print(Q5)
+            answer5 = input().upper()
+            State = ' '.join(answer5.split())
+            if State in state_dict:
+                city_channel_list = state_dict[State].split(':')
+                if len(city_channel_list) >= 2:
+                    city = city_channel_list[0].strip()
+                    news_channel = city_channel_list[1].strip()
+                    print(f"The news channel for {city} in {State} is {news_channel}.")
+                    print("Search Completed", ddg_answers(f"{city} {news_channel}"))
+
+                else:
+                    print("Unable to find news channel for specified state.")
+            else:
+                print("State not found in dictionary")
+
+        if answer4 not in n and y:
+            pass
+
+        print(Q6)
+        answer6 = input()
+        if answer6 in n:
+            pass
+        if answer6 in y:
+            print(wb.open_new_tab("https://osintframework.com" and wb.open_new_tab("https://yandex.com/images/") and
+                                  wb.open_new_tab("https://images.google.com/")))
+        if answer6 not in n and answer6 not in y:
+            print(error)
+            exit()
+
+        print(Q7)
+        answer7 = input()
+        if answer7 in n:
+            print("Thanks For Your Time!, Best Of Wishes")
+            exit()
+        if answer7 in y:
+            print(wb.open_new_tab("https://osintframework.com" and "https://pimeyes.com" and
+            wb.open_new_tab("https://cylect.io/")))
+        if answer7 not in n and answer7 not in y:
+            print(error)
+            exit()
+
+print(InfoFinder())
